@@ -1,0 +1,75 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #183b3b;
+  background: #f0f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #f0f7f5 0%, #e1f0eb 100%);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: 1.5rem;
+  color: #fff;
+  background: linear-gradient(110deg, #126b68, #22877a);
+  border-radius: 1rem;
+  box-shadow: 0 0.6rem 1.5rem rgb(18 75 70 / 16%);
+}
+
+.app-header h1 {
+  margin-bottom: 1rem;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+.app-header nav a {
+  padding: 0.4rem 0.75rem;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 999px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.app-header nav a:hover,
+.app-header nav a:focus-visible {
+  color: #145451;
+  background: #fff;
+}
+
+.card {
+  border: 1px solid #d5e8e2;
+  border-top: 4px solid #39a88d;
+  border-radius: 0.9rem;
+  box-shadow: 0 0.5rem 1.25rem rgb(24 74 66 / 8%);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card h2,
+.card h3 {
+  color: #145451;
+}
+
+.list-group-item {
+  border-color: #e1eee9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
