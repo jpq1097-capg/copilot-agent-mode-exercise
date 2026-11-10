@@ -35,13 +35,16 @@ export default function Activities() {
         {error && <p role="alert">Unable to load activities.</p>}
         {!loading && !error && activities.length === 0 && <p>No activities yet.</p>}
         {!loading && !error && activities.length > 0 && (
-          <ul className="list-group">
-            {activities.map((activity, index) => (
-              <li className="list-group-item" key={activity._id ?? `${activity.type}-${index}`}>
-                {activity.type}: {activity.minutes} minutes, {activity.points} points
-              </li>
-            ))}
-          </ul>
+          <>
+            <p role="status">Activities loaded.</p>
+            <ul className="list-group">
+              {activities.map((activity, index) => (
+                <li className="list-group-item" key={activity._id ?? `${activity.type}-${index}`}>
+                  {activity.type}: {activity.minutes} minutes, {activity.points} points
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
     </section>

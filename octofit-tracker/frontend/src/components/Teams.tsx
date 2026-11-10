@@ -35,14 +35,17 @@ export default function Teams() {
         {error && <p role="alert">Unable to load teams.</p>}
         {!loading && !error && teams.length === 0 && <p>No teams yet.</p>}
         {!loading && !error && teams.length > 0 && (
-          <ul className="list-group">
-            {teams.map((team, index) => (
-              <li className="list-group-item" key={team._id ?? `${team.name}-${index}`}>
-                <h3 className="h6">{team.name}</h3>
-                <p className="mb-0">Members: {team.members.length}</p>
-              </li>
-            ))}
-          </ul>
+          <>
+            <p role="status">Teams loaded.</p>
+            <ul className="list-group">
+              {teams.map((team, index) => (
+                <li className="list-group-item" key={team._id ?? `${team.name}-${index}`}>
+                  <h3 className="h6">{team.name}</h3>
+                  <p className="mb-0">Members: {team.members.length}</p>
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
     </section>

@@ -35,17 +35,20 @@ export default function Workouts() {
         {error && <p role="alert">Unable to load workout suggestions.</p>}
         {!loading && !error && suggestions.length === 0 && <p>No workout suggestions yet.</p>}
         {!loading && !error && suggestions.length > 0 && (
-          <ul className="list-group">
-            {suggestions.map((workout, index) => (
-              <li className="list-group-item" key={workout._id ?? `${workout.title}-${index}`}>
-                <h3 className="h6">{workout.title}</h3>
-                {workout.focus && <p className="mb-1">Focus: {workout.focus}</p>}
-                {workout.minutes !== undefined && <p className="mb-1">Duration: {workout.minutes} minutes</p>}
-                {workout.difficulty && <p className="mb-1">Difficulty: {workout.difficulty}</p>}
-                {workout.reason && <p className="mb-0">{workout.reason}</p>}
-              </li>
-            ))}
-          </ul>
+          <>
+            <p role="status">Workout suggestions loaded.</p>
+            <ul className="list-group">
+              {suggestions.map((workout, index) => (
+                <li className="list-group-item" key={workout._id ?? `${workout.title}-${index}`}>
+                  <h3 className="h6">{workout.title}</h3>
+                  {workout.focus && <p className="mb-1">Focus: {workout.focus}</p>}
+                  {workout.minutes !== undefined && <p className="mb-1">Duration: {workout.minutes} minutes</p>}
+                  {workout.difficulty && <p className="mb-1">Difficulty: {workout.difficulty}</p>}
+                  {workout.reason && <p className="mb-0">{workout.reason}</p>}
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
     </section>

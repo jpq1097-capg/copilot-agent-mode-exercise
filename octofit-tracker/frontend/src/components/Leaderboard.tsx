@@ -35,13 +35,16 @@ export default function Leaderboard() {
         {error && <p role="alert">Unable to load leaderboard.</p>}
         {!loading && !error && entries.length === 0 && <p>No leaderboard scores yet.</p>}
         {!loading && !error && entries.length > 0 && (
-          <ol className="list-group list-group-numbered">
-            {entries.map((entry) => (
-              <li className="list-group-item" key={`${entry.rank}-${entry.teamName}`}>
-                {entry.teamName}: {entry.totalPoints} points
-              </li>
-            ))}
-          </ol>
+          <>
+            <p role="status">Leaderboard loaded.</p>
+            <ol className="list-group list-group-numbered">
+              {entries.map((entry) => (
+                <li className="list-group-item" key={`${entry.rank}-${entry.teamName}`}>
+                  {entry.teamName}: {entry.totalPoints} points
+                </li>
+              ))}
+            </ol>
+          </>
         )}
       </div>
     </section>
