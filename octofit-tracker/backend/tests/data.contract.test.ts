@@ -11,6 +11,8 @@ describe('OctoFit data contract', () => {
     expect(error?.errors.name).toBeDefined();
     expect(error?.errors.email).toBeDefined();
     expect(error?.errors.fitnessGoal).toBeDefined();
+    const invalidEmail = new User({ name: 'Mona', email: 'not-an-email', fitnessGoal: 'endurance' }).validateSync();
+    expect(invalidEmail?.errors.email).toBeDefined();
   });
   it('requires teams to have a name, mascot, and members array', () => {
     const team = new Team({ name: 'Octocats', mascot: 'Mona', members: [] });
@@ -34,6 +36,16 @@ describe('OctoFit data contract', () => {
     expect(error?.errors.minutes).toBeDefined();
     expect(error?.errors.points).toBeDefined();
     expect(error?.errors.occurredAt).toBeDefined();
+    const invalidAmounts = new Activity({
+      user: new mongoose.Types.ObjectId(),
+      team: new mongoose.Types.ObjectId(),
+      type: 'run',
+      minutes: 0,
+      points: -1,
+      occurredAt: new Date(),
+    }).validateSync();
+    expect(invalidAmounts?.errors.minutes).toBeDefined();
+    expect(invalidAmounts?.errors.points).toBeDefined();
   });
   it('defines workout suggestions with focus, duration, and difficulty', () => {
     const workout = new Workout({ title: 'Intervals' });
@@ -41,6 +53,7 @@ describe('OctoFit data contract', () => {
     expect(error?.errors.focus).toBeDefined();
     expect(error?.errors.minutes).toBeDefined();
     expect(error?.errors.difficulty).toBeDefined();
+    expect(new Workout({ title: 'Intervals', focus: 'endurance', minutes: 0, difficulty: 'moderate' }).validateSync()?.errors.minutes).toBeDefined();
   });
 
   it('seeds representative data for all four capabilities idempotently', async () => {
