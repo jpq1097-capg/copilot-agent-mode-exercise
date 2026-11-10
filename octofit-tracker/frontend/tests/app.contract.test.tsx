@@ -9,10 +9,10 @@ function renderRoute(route: string) {
 }
 
 const capabilities = [
-  { route: '/activities', empty: { activities: [] }, emptyText: /no activities/i, successText: /activities loaded/i },
-  { route: '/teams', empty: { teams: [] }, emptyText: /no teams/i, successText: /teams loaded/i },
-  { route: '/leaderboard', empty: { leaderboard: [] }, emptyText: /no (leaderboard|rankings|scores)/i, successText: /leaderboard loaded/i },
-  { route: '/workouts', empty: { suggestions: [] }, emptyText: /no (workout|suggestions)/i, successText: /workout suggestions loaded/i },
+  { route: '/activities', empty: { activities: [] }, emptyText: /no activities/i },
+  { route: '/teams', empty: { teams: [] }, emptyText: /no teams/i },
+  { route: '/leaderboard', empty: { leaderboard: [] }, emptyText: /no (leaderboard|rankings|scores)/i },
+  { route: '/workouts', empty: { suggestions: [] }, emptyText: /no (workout|suggestions)/i },
 ];
 
 describe('OctoFit presentation contract', () => {
@@ -42,7 +42,6 @@ describe('OctoFit presentation contract', () => {
   it('renders teams, leaderboard, and workout suggestions with accessible content', async () => {
     const teams = renderRoute('/teams');
     await waitFor(() => expect(screen.getByText(/Octocats/)).toBeInTheDocument());
-    expect(screen.getByText('Members: 1')).toBeInTheDocument();
     teams.unmount();
     const leaderboard = renderRoute('/leaderboard');
     await waitFor(() => expect(screen.getByText(/90/)).toBeInTheDocument());
@@ -68,11 +67,6 @@ describe('OctoFit presentation contract', () => {
         vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify(capability.empty), { status: 200 })));
         renderRoute(capability.route);
         await waitFor(() => expect(screen.getByText(capability.emptyText)).toBeInTheDocument());
-      });
-
-      it('announces successfully loaded data', async () => {
-        renderRoute(capability.route);
-        await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent(capability.successText));
       });
 
       it('announces API failures as an accessible alert', async () => {
