@@ -42,6 +42,7 @@ describe('OctoFit presentation contract', () => {
   it('renders teams, leaderboard, and workout suggestions with accessible content', async () => {
     const teams = renderRoute('/teams');
     await waitFor(() => expect(screen.getByText(/Octocats/)).toBeInTheDocument());
+    expect(screen.getByText('Members: 1')).toBeInTheDocument();
     teams.unmount();
     const leaderboard = renderRoute('/leaderboard');
     await waitFor(() => expect(screen.getByText(/90/)).toBeInTheDocument());
